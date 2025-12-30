@@ -272,9 +272,7 @@ if (lastValidCount == 0) {
   }
   
   // Build final line string
-  final currentLine = rtl 
-      ? nonEmptyWords.sublist(nonEmptyWords.length - lastValidCount).reversed.join(' ')
-      : nonEmptyWords.sublist(0, lastValidCount).join(' ');
+  final currentLine = nonEmptyWords.sublist(0, lastValidCount).join(' ');
   
   // Calculate position
   int xPosition = margin.left;
