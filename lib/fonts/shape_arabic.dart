@@ -43,6 +43,29 @@ class ShapeArabic {
     return _shapingTable.containsKey(codeUnit);
   }
 
+   static int _mirrorChar(int char) {
+    switch (char) {
+      case 0x0028:
+        return 0x0029; // ( -> )
+      case 0x0029:
+        return 0x0028; // ) -> (
+      case 0x005B:
+        return 0x005D; // [ -> ]
+      case 0x005D:
+        return 0x005B; // ] -> [
+      case 0x007B:
+        return 0x007D; // { -> }
+      case 0x007D:
+        return 0x007B; // } -> {
+      case 0x003C:
+        return 0x003E; // < -> >
+      case 0x003E:
+        return 0x003C; // > -> <
+      default:
+        return char;
+    }
+  }
+
   static String shape(String input) {
     final runes = input.runes.toList();
     final shaped = <int>[];
@@ -80,6 +103,6 @@ class ShapeArabic {
       }
     }
 
-    return String.fromCharCodes(shaped.reversed);
+    return String.fromCharCodes(shaped.reversed.map(_mirrorChar));
   }
 }
